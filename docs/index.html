@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Space Assassins</title>
+  <meta name="description" content="Join a Space Assassins game — free multiplayer arena FPS for Windows, macOS and Linux.">
+  <style>
+    :root { --hud: #7fe3ff; --edge: rgba(127, 227, 255, 0.45); }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px;
+      background: radial-gradient(ellipse at 50% 30%, #143a5a, #02060c 70%); color: #e6f6ff;
+      font-family: "Bahnschrift", "Segoe UI", system-ui, sans-serif; }
+    main { width: 100%; max-width: 560px; background: rgba(8, 18, 30, 0.9); border: 1px solid var(--edge); padding: 28px;
+      display: flex; flex-direction: column; gap: 14px; text-align: center; }
+    h1 { margin: 0; color: var(--hud); letter-spacing: 6px; font-size: 34px; }
+    h1 span { display: block; color: #fff; font-size: 22px; letter-spacing: 10px; }
+    .code { font-size: 46px; letter-spacing: 10px; font-weight: 700; color: var(--hud); user-select: all; }
+    a.btn { display: block; padding: 14px; background: rgba(40, 150, 210, 0.8); color: #fff; text-decoration: none;
+      letter-spacing: 2px; font-weight: 700; border: 1px solid var(--edge); }
+    a.btn:hover { background: rgba(70, 190, 250, 0.9); }
+    .dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .dl a { padding: 10px 4px; border: 1px solid var(--edge); color: #e6f6ff; text-decoration: none; font-size: 14px; }
+    p { margin: 0; color: #bcd; line-height: 1.5; font-size: 14px; }
+    @media (max-width: 480px) { .dl { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>SPACE<span>ASSASSINS</span></h1>
+    <div id="invite" hidden>
+      <p>You're invited to room</p>
+      <div class="code" id="code"></div>
+      <a class="btn" id="open">OPEN IN SPACE ASSASSINS</a>
+      <p>Or open the app, choose <b>PLAY WITH FRIENDS</b> and type the code.</p>
+    </div>
+    <p>Free multiplayer arena FPS. Works across different networks with no port forwarding, or offline on a LAN.</p>
+    <p><b>Don't have it yet?</b> Download for your system:</p>
+    <div class="dl">
+      <a href="https://github.com/aw917/spaceassassins-releases/releases/latest">Windows</a>
+      <a href="https://github.com/aw917/spaceassassins-releases/releases/latest">macOS</a>
+      <a href="https://github.com/aw917/spaceassassins-releases/releases/latest">Linux / Mint</a>
+    </div>
+    <p><a style="color:var(--hud)" href="https://github.com/aw917/spaceassassins-releases">All downloads &amp; install help</a></p>
+  </main>
+  <script>
+    const room = decodeURIComponent(location.hash.slice(1)).toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
+    if (room) {
+      document.getElementById('invite').hidden = false;
+      document.getElementById('code').textContent = room;
+      const link = 'spaceassassins://join/' + room;
+      document.getElementById('open').href = link;
+      document.title = 'Join room ' + room + ' — Space Assassins';
+      setTimeout(() => { location.href = link; }, 400); // try to open the app straight away
+    }
+  </script>
+</body>
+</html>
